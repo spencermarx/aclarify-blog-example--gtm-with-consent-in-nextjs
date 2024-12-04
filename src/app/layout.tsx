@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { GoogleTagManager } from "@/components/tracking/GoogleTagManager";
+import { IS_GTM_ENABLED } from "@/libs/tracking/config.tracking";
+import { RootInnerLayout } from "@/components/layouts/RootInnerLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {IS_GTM_ENABLED && <GoogleTagManager />}
+        <RootInnerLayout>{children}</RootInnerLayout>
       </body>
     </html>
   );
